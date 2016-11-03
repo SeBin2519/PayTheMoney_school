@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/skin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="kr.hs.emirim.sebin.paythemoney.MainActivity"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:src="@drawable/menu_icon"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+        <ImageButton
+            android:id="@+id/but_douch"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:src="@drawable/but_douch"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="5dp" />
+
+        <ImageButton
+            android:id="@+id/but_mol"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:src="@drawable/but_mol"
+            android:layout_marginBottom="3dp"
+            android:layout_gravity="center"
+            />
+
+        <ImageButton
+            android:id="@+id/but_random"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:src="@drawable/but_random"
+            android:layout_gravity="center"
+            />
+        </LinearLayout>
+</LinearLayout>
