@@ -137,8 +137,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textColor="#9c1414"
-        android:textSize="30sp"
+        android:textColor="#002266"
+        android:textSize="20sp"
         android:nestedScrollingEnabled="true"
         android:layout_marginBottom="-100dp" />
 
