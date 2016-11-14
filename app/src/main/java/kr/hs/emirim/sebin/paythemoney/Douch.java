@@ -26,6 +26,7 @@ public class Douch extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Toast.makeText(this,"각자 번호를 정해 주십시오.",Toast.LENGTH_LONG).show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.douch);
 
@@ -87,18 +88,19 @@ public class Douch extends AppCompatActivity implements View.OnClickListener{
             case R.id.but_douch_delete:
                 editPerson.setText("");
                 editPrice.setText("");
+                textresult.setText("");
                 vFlipper.setVisibility(View.INVISIBLE);
                 butStart.setVisibility(View.INVISIBLE);
                 butStop.setVisibility(View.INVISIBLE);
                 break;
             case R.id.but_start:
-                vFlipper.setFlipInterval(50);//viewFlipper에 넘겨지는 간격 설정 => 1000: 1초
                 perIndex = (int)(Math.random()*person)+1;
+                vFlipper.setFlipInterval(50);//viewFlipper에 넘겨지는 간격 설정 => 1000: 1초
                 vFlipper.startFlipping();
                 break;
             case R.id.but_stop:
                 vFlipper.stopFlipping();
-                textresult.setText("1인 지불 금액: "+douchMoney+"원 "+"\t"+"잔돈: "+change+"원 "+"\n"+"잔돈은 "+perIndex+"번째 사람이 내주세요!");
+                textresult.setText("1인 지불 금액: "+douchMoney+"원 "+"\t"+"잔돈: "+change+"원   "+"\n"+"잔돈은 "+perIndex+"번째 사람이 내주세요!");
         }
     }
 }

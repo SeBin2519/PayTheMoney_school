@@ -5,6 +5,7 @@ package kr.hs.emirim.sebin.paythemoney;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.TextView;
+        import android.widget.Toast;
 
         import java.util.Random;
 
@@ -12,8 +13,16 @@ public class RandomMenu extends AppCompatActivity implements View.OnClickListene
     Button but_ok,but_cancel;
     EditText editPersonNum,editPrice;
     TextView textResult;
+    String result="";
+
+    int people=0;
+    int price=0;
+    int lastPrice=0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Toast.makeText(this,"각자 번호를 정해 주십시오.",Toast.LENGTH_LONG).show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.random);
 
@@ -34,47 +43,88 @@ public class RandomMenu extends AppCompatActivity implements View.OnClickListene
      * @paramv The view that was clicked.
      * */
 
-    void showResult(){
+    void showResult(int editPersonNum,int editPrice){
         //   2개의 EditText에 입력된 값을 반환받는다.
-        Random r=new Random();
-        String editPersonNumStr=editPersonNum.getText().toString();
-        String editPriceStr=editPrice.getText().toString();
+        people=editPersonNum;
+        price=editPrice;
+        lastPrice=price;
+        int i=0;
 
-        int peopleNum=Integer.parseInt(editPersonNumStr);
-        int price=Integer.parseInt(editPriceStr);
-        int realPrice=price;
+        int randomPrice[]=new int[people];
+        int randomPrice2[]=new int[people];
 
-        int moneyResult[]=new int[peopleNum];
-        for(int j=0;j<peopleNum;j++) {
-            moneyResult[j]=0;
+        for(i=0;i<people;i++) {
+            randomPrice[i]=0;
+            randomPrice2[i]=0;
         }
 
-        int i=0;
-        while(realPrice!=0){
-            moneyResult[i]=r.nextInt(realPrice)*realPrice+100;
-            realPrice -= moneyResult[i];
-            if(moneyResult[i]%100!=0){
-                realPrice+=moneyResult[i]%100;
-                moneyResult[i]-=moneyResult[i]%100;
+        i=0;
+        while(lastPrice!=0){
+            if(i==(people-1)) {
+                randomPrice[i] = lastPrice;
+                break;
             }
+            randomPrice[i] = ((int) (Math.random() * lastPrice)+100);
+            lastPrice-=randomPrice[i];
+
+            if(randomPrice[i]%100!=0){
+                lastPrice+=randomPrice[i]%100;
+                randomPrice[i]-=randomPrice[i]%100;
+            }
+
             i++;
         }
-        for(int j=0;j<peopleNum;j++) {
-            String str;
-            str="No."+(j+1)+" : "+moneyResult[j];
-            textResult.append(str);
+
+        for(i=0;i<people;i++)
+        {
+            randomPrice2[i] = randomPrice[(int) (Math.random() * people)+0];
+            for(int j=0;j<i;j++) //중복제거를 위한 for문
+            {
+                if (randomPrice2[i] == randomPrice2[j]) {
+                    i--;
+                }
+            }
+        }
+        //번호와 값을 연결
+
+        for(i=0;i<people;i++) //채워진 배열을 출력하기 위한 for문
+        {
+            result += "No. " + (i + 1) + " :  " + randomPrice2[i] + "원\n";
         }
     }
 
     @Override
     public void onClick(View v) {
-       switch(v.getId()){
+        String editPersonNumStr=editPersonNum.getText().toString();
+        String editPriceStr=editPrice.getText().toString();
+        String textResultStr=textResult.getText().toString();
+
+        int iEditPersonNumStr=0;
+        int iEditPriceStr=0;
+
+        switch(v.getId()){
             case R.id.but_random_ok:
-                showResult();
+                if (editPersonNumStr.equals("") || editPrice==null) {
+                    Toast.makeText(this,"제대로 된 값을 입력해 주세요!",Toast.LENGTH_LONG).show();
+                    textResult.setText("");
+                }
+                else {
+                    iEditPersonNumStr=Integer.parseInt(editPersonNumStr);
+                    iEditPriceStr=Integer.parseInt(editPriceStr);
+
+                    showResult(iEditPersonNumStr, iEditPriceStr);
+                    textResult.setText(result);
+                }
                 break;
             case R.id.but_random_cancel:
+                people=0;
+                price=0;
+                lastPrice=0;
+                result="";
                 editPersonNum.setText("");
                 editPrice.setText("");
+                textResult.setText("");
+
                 break;
         }
     }

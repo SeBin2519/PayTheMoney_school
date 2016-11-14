@@ -22,6 +22,7 @@ public class Mol extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Toast.makeText(this,"각자 번호를 정해 주십시오.",Toast.LENGTH_LONG).show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mol);
 
@@ -44,13 +45,13 @@ public class Mol extends AppCompatActivity implements View.OnClickListener{
                 else {
                     personNum=Integer.parseInt(person);
                     vFlipper.setFlipInterval(50);//viewFlipper에 넘겨지는 간격 설정 => 1000: 1초
-                    perIndex = (int)(Math.random()*personNum)+1;
                     vFlipper.startFlipping();
+                    perIndex = (int)(Math.random()*personNum)+1;
                 }
                 break;
             case R.id.but_stop:
                 vFlipper.stopFlipping();
-                Toast.makeText(this,perIndex+"번째 사람이 걸렸습니다!!",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,perIndex+"번째 사람이 걸렸습니다!!",Toast.LENGTH_SHORT).show();
                 textresult.setText(" 걸린 사람: "+perIndex+"번째 사람!");
                 break;
         }
