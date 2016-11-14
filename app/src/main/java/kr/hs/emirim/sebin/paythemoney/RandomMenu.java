@@ -1,12 +1,15 @@
 package kr.hs.emirim.sebin.paythemoney;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
+        import android.util.Log;
         import android.view.View;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.TextView;
         import android.widget.Toast;
 
+        import java.util.ArrayList;
+        import java.util.Collections;
         import java.util.Random;
 
 public class RandomMenu extends AppCompatActivity implements View.OnClickListener{
@@ -51,11 +54,12 @@ public class RandomMenu extends AppCompatActivity implements View.OnClickListene
         int i=0;
 
         int randomPrice[]=new int[people];
-        int randomPrice2[]=new int[people];
+
+        //int randomPrice2[]=new int[people];
 
         for(i=0;i<people;i++) {
             randomPrice[i]=0;
-            randomPrice2[i]=0;
+            //randomPrice2[i]=0;
         }
 
         i=0;
@@ -71,25 +75,23 @@ public class RandomMenu extends AppCompatActivity implements View.OnClickListene
                 lastPrice+=randomPrice[i]%100;
                 randomPrice[i]-=randomPrice[i]%100;
             }
-
             i++;
         }
 
-        for(i=0;i<people;i++)
+        /*for(i=0;i<people;i++) //채워진 배열을 출력하기 위한 for문
         {
-            randomPrice2[i] = randomPrice[(int) (Math.random() * people)+0];
-            for(int j=0;j<i;j++) //중복제거를 위한 for문
-            {
-                if (randomPrice2[i] == randomPrice2[j]) {
-                    i--;
-                }
-            }
-        }
-        //번호와 값을 연결
+            randomPrice2[i]=randomPrice[i];
+        }*/
 
-        for(i=0;i<people;i++) //채워진 배열을 출력하기 위한 for문
-        {
-            result += "No. " + (i + 1) + " :  " + randomPrice2[i] + "원\n";
+        ArrayList<Integer> is = new ArrayList<Integer>();
+        for(i=0;i<people;i++)
+            is.add(randomPrice[i]);
+
+        Log.v("*^^* Collection Value: ",is.toString());
+        Collections.shuffle(is);
+
+        for(i=0;i<people;i++){ //채워진 배열을 출력하기 위한 for문
+            result += "No. " + (i + 1) + " :  " + is.get(i) + "원\n";
         }
     }
 
@@ -104,17 +106,20 @@ public class RandomMenu extends AppCompatActivity implements View.OnClickListene
 
         switch(v.getId()){
             case R.id.but_random_ok:
-                if (editPersonNumStr.equals("") || editPrice==null) {
-                    Toast.makeText(this,"제대로 된 값을 입력해 주세요!",Toast.LENGTH_LONG).show();
+                if(!textResult.equals("")) {
+                    result="";
                     textResult.setText("");
                 }
-                else {
-                    iEditPersonNumStr=Integer.parseInt(editPersonNumStr);
-                    iEditPriceStr=Integer.parseInt(editPriceStr);
-
-                    showResult(iEditPersonNumStr, iEditPriceStr);
-                    textResult.setText(result);
-                }
+              if (editPersonNumStr.equals("") || editPrice==null) {
+                  Toast.makeText(this,"제대로 된 값을 입력해 주세요!",Toast.LENGTH_LONG).show();
+                  textResult.setText("");
+              }
+              else {
+                  iEditPersonNumStr=Integer.parseInt(editPersonNumStr);
+                  iEditPriceStr=Integer.parseInt(editPriceStr);
+                  showResult(iEditPersonNumStr, iEditPriceStr);
+                  textResult.setText(result);
+              }
                 break;
             case R.id.but_random_cancel:
                 people=0;
