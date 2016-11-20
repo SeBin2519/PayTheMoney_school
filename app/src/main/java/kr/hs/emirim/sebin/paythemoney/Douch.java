@@ -78,6 +78,7 @@ public class Douch extends AppCompatActivity implements View.OnClickListener{
 
         switch(v.getId()){
             case R.id.but_douch_check:
+                textresult.setText("");
                 if(editPerson.equals("") || editPerson==null|| editPrice.equals("") || editPrice==null) Toast.makeText(this,"제대로 된 값을 입력해 주세요!",Toast.LENGTH_LONG).show();
                 else{
                     person=Integer.parseInt(epMon);

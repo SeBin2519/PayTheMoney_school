@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                />
+                android:backgroundTint="#5CD1E5" />
             <TextView
                 android:layout_width="38dp"
                 android:layout_height="33dp"
@@ -62,7 +62,8 @@
                 android:textSize="20sp"
                 android:nestedScrollingEnabled="true"
                 android:layout_gravity="center"
-                android:gravity="center" />
+                android:gravity="center"
+                android:layout_margin="7dp" />
 
             <LinearLayout
                 android:layout_gravity="center"

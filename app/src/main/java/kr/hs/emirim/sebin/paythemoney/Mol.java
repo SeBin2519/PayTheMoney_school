@@ -41,6 +41,7 @@ public class Mol extends AppCompatActivity implements View.OnClickListener{
 
         switch(view.getId()){
             case R.id.but_start:
+                textresult.setText("");
                 if(editPerson.equals("") || editPerson==null) Toast.makeText(this,"제대로 된 값을 입력해 주세요!",Toast.LENGTH_LONG).show();
                 else {
                     personNum=Integer.parseInt(person);

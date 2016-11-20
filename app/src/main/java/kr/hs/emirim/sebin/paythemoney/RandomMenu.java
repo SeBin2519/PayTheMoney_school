@@ -91,7 +91,8 @@ public class RandomMenu extends AppCompatActivity implements View.OnClickListene
         Collections.shuffle(is);
 
         for(i=0;i<people;i++){ //채워진 배열을 출력하기 위한 for문
-            result += "No. " + (i + 1) + " :  " + is.get(i) + "원\n";
+            //result += "No. " + (i + 1) + " :  " + is.get(i) + "원\n";
+            result += (i + 1) + ". " + is.get(i) + "원\n";
         }
     }
 
@@ -106,6 +107,7 @@ public class RandomMenu extends AppCompatActivity implements View.OnClickListene
 
         switch(v.getId()){
             case R.id.but_random_ok:
+                textResult.setText("");
                 if(!textResult.equals("")) {
                     result="";
                     textResult.setText("");
