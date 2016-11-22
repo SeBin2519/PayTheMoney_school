@@ -10,10 +10,12 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    private final long	FINSH_INTERVAL_TIME    = 2000;
+     private long		backPressedTime        = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        setTheme(android.R.style.Theme_NoTitleBar_Fullscreen);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -31,6 +33,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
+
+    @Override
+     public void onBackPressed() { //이전버튼
+       long tempTime        = System.currentTimeMillis();
+        long intervalTime    = tempTime - backPressedTime;
+        if ( 0 <= intervalTime && FINSH_INTERVAL_TIME >= intervalTime ){
+            super.onBackPressed();
+         }
+        else {
+          backPressedTime = tempTime;
+            Toast.makeText(getApplicationContext(),"'뒤로'버튼을한번더누르시면종료됩니다.",Toast.LENGTH_SHORT).show();
+        }
+     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){

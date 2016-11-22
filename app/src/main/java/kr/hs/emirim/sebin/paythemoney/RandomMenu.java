@@ -25,8 +25,9 @@ public class RandomMenu extends AppCompatActivity implements View.OnClickListene
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Toast.makeText(this,"각자 번호를 정해 주십시오.",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"각자 번호를 정해 주십시오.",Toast.LENGTH_SHORT).show();
         super.onCreate(savedInstanceState);
+        setTheme(android.R.style.Theme_NoTitleBar_Fullscreen);
         setContentView(R.layout.random);
 
         but_ok=(Button)findViewById(R.id.but_random_ok);
